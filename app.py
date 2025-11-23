@@ -11,9 +11,9 @@ if 'model_loaded' not in st.session_state:
     with st.spinner("Đang tải mô hình PhoBERT từ HuggingFace..."):
         st.session_state.model_loaded = preload_model()
     if st.session_state.model_loaded:
-        st.success("✓ Mô hình đã được tải thành công!")
+        st.success("Mô hình đã được tải thành công!")
     else:
-        st.error("✗ Không thể tải mô hình. Sẽ sử dụng chế độ giả lập.")
+        st.error("Không thể tải mô hình. Sẽ sử dụng chế độ giả lập.")
 
 st.header("Nhập câu bạn muốn phân tích:")
 

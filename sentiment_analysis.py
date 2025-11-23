@@ -64,10 +64,10 @@ FALLBACK_LABEL_MAP = {
 
 
 # ========== COMPONENT 2: MODEL LOADING & INFERENCE ==========
-# We'll lazily load the pipeline once and reuse it to avoid reloading the model on every call.
+# Load the pipeline once and reuse it to avoid reloading the model on every call.
 _SENTIMENT_PIPELINE = None
 
-# OLD LOCAL MODEL LOADING (commented for rollback)
+# OLD LOCAL MODEL LOADING
 # _MODEL_DIR = Path(__file__).parent / "model" / "phobert-sentiment-vietnamese-best"
 # 
 # def _get_model_dir() -> Path:
@@ -77,22 +77,20 @@ _SENTIMENT_PIPELINE = None
 #         return Path(env)
 #     return _MODEL_DIR
 
-# NEW HUGGINGFACE MODEL PATH
 _MODEL_PATH = "duchienmtp/PhoBERT-sentiment-analysis"
 
 
 def preload_model():
     """Preload the model pipeline during app initialization.
     
-    Call this function to warm up the model when the app starts,
-    rather than waiting for the first user request.
+    Call this function to warm up the model when the app starts
     """
     try:
         _load_pipeline()
         print(f"Model '{_MODEL_PATH}' preloaded successfully")
         return True
     except Exception as e:
-        print(f"✗ Failed to preload model: {e}")
+        print(f"Failed to preload model: {e}")
         return False
 
 
@@ -109,7 +107,7 @@ def _load_pipeline():
     
     _SENTIMENT_PIPELINE = pipeline("text-classification", model=model, tokenizer=tokenizer, device=device)
     
-    # OLD LOCAL MODEL LOADING (commented for rollback)
+    # OLD LOCAL MODEL LOADING
     # model_dir = _get_model_dir()
     # if not model_dir.exists():
     #     raise FileNotFoundError(f"Model directory not found: {model_dir}")
