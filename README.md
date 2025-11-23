@@ -22,7 +22,7 @@
 
 ### 1\. Yêu cầu
 
-  * Python 3.8+
+  * Python 3.13.1
   * `pip` (Python package installer)
 
 ### 2\. Cài đặt
